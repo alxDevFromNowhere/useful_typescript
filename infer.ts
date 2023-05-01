@@ -28,3 +28,9 @@ export type TUnwrapPromise<T> =
     T extends (...args: any) => Promise<infer U> ? U :
       T extends (...args: any) => infer U ? U :
         T;
+
+declare function foo(a: number): void;
+declare function foo(a: string): string;
+declare function foo(a: boolean[]): Array<boolean>
+
+type R = ReturnType<typeof foo>; // boolean[] last call signature
