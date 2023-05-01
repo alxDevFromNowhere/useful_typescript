@@ -22,3 +22,9 @@ type T5 = Unpacked<Unpacked<Promise<string>[]>>;  // string
 type FirstIfString<T> = T extends [infer S, ...unknown[]] ? S extends string ? S : never : never;
 // ts >= 4.7
 type FirstIfString<T> = T extends [infer S extends string, ...unknown[]] ? S : never;
+
+export type TUnwrapPromise<T> =
+  T extends Promise<infer U> ? U :
+    T extends (...args: any) => Promise<infer U> ? U :
+      T extends (...args: any) => infer U ? U :
+        T;
