@@ -12,3 +12,33 @@ type T3 = EventName<"foo" | "bar" | "baz">;
 
 type T4 = Concat<"top" | "bottom", "left" | "right">;
 // "top-left" | "top-right" | "bottom-left" | "bottom-right"
+  
+type InferSide<T> = T extends `${infer R}-${Alignment}` ? R : T;
+
+type T7 = InferSide<"left-start">;  // "left"
+type T8 = InferSide<"right-end">;   // "right"
+
+type WithGeteers<T extends object> = {
+  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K]
+} & T
+
+type Person = {
+  name: string;
+  age: number;
+  childer: Person[];
+}
+
+const p: WithGeteers<Person> = {
+  name: '',
+  age: 22,
+  childer: [],
+  getAge() {
+    return this.age;
+  },
+  getChilder() {
+    return this.childer;
+  },
+  getName() {
+    return this.name;
+  }
+}
