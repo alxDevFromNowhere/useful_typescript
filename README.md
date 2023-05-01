@@ -1,1 +1,1 @@
-# useful_typescript
+# Useful typescript
