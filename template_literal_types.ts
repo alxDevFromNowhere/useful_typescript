@@ -6,3 +6,9 @@ type T0 = EventName<"foo">; // 'fooChanged'
 type T1 = Concat<"Hello", "World">; // 'Hello-World'
 type T2 = ToString<"bytefer" | 666 | true | -1234n>;
 // "bytefer" | "true" | "666" | "-1234"
+  
+type T3 = EventName<"foo" | "bar" | "baz">;
+// "fooChanged" | "barChanged" | "bazChanged"
+
+type T4 = Concat<"top" | "bottom", "left" | "right">;
+// "top-left" | "top-right" | "bottom-left" | "bottom-right"
